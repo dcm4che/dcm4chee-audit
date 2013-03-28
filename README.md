@@ -54,6 +54,7 @@ Developer Info
 The Audit Module is getting a default Audit Logger to write messages to from org.dcm4che.net.audit.AuditLogger.
 The default Audit Logger has to be set in a deployed project (e.g. dcm4che-arc or dcm4chee-proxy), e.g. when
 initializing the Audit Logger also add the methode call:
+
 ```java
 AuditLogger.setDefaultLogger(logger);
-```.
+```
