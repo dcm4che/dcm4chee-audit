@@ -74,34 +74,36 @@ public class AuditJSSESocketFactory extends JSSESocketFactory {
                 logger = AuditLogger.getDefaultLogger();
             super.handshake(sock);
         } catch (IOException e) {
-            if (logger != null && logger.isInstalled()) {
-                Calendar timeStamp = logger.timeStamp();
-                AuditMessage msg = new AuditMessage();
-                msg.setEventIdentification(AuditMessages.createEventIdentification(
-                        EventID.SecurityAlert, 
-                        EventActionCode.Execute, 
-                        timeStamp, 
-                        EventOutcomeIndicator.MinorFailure, 
-                        null, 
-                        EventTypeCode.NodeAuthentication));
-                msg.getActiveParticipant().add(logger.createActiveParticipant(false, RoleIDCode.Application));
-                msg.getParticipantObjectIdentification().add(AuditMessages.createParticipantObjectIdentification(
-                        sock.getInetAddress().getCanonicalHostName(), 
-                        ParticipantObjectIDTypeCode.NodeID, 
-                        null, 
-                        null, 
-                        ParticipantObjectTypeCode.SystemObject, 
-                        ParticipantObjectTypeCodeRole.SecurityResource, 
-                        null, 
-                        null, 
-                        null,
-                        AuditMessages.createParticipantObjectDetail("Alert Description", e.getMessage().getBytes())));
-                try {
-                    LOG.debug("AuditMessage: " + AuditMessages.toXML(msg));
-                    logger.write(timeStamp, msg);
-                } catch (Exception e2) {
-                    e2.printStackTrace();
-                }
+            if (logger == null || !logger.isInstalled())
+                return;
+
+            Calendar timeStamp = logger.timeStamp();
+            AuditMessage msg = new AuditMessage();
+            msg.setEventIdentification(AuditMessages.createEventIdentification(
+                    EventID.SecurityAlert, 
+                    EventActionCode.Execute, 
+                    timeStamp, 
+                    EventOutcomeIndicator.MinorFailure, 
+                    null, 
+                    EventTypeCode.NodeAuthentication));
+            msg.getActiveParticipant().add(logger.createActiveParticipant(false, RoleIDCode.Application));
+            msg.getParticipantObjectIdentification().add(AuditMessages.createParticipantObjectIdentification(
+                    sock.getInetAddress().getCanonicalHostName(), 
+                    ParticipantObjectIDTypeCode.NodeID, 
+                    null, 
+                    null, 
+                    ParticipantObjectTypeCode.SystemObject, 
+                    ParticipantObjectTypeCodeRole.SecurityResource, 
+                    null, 
+                    null, 
+                    null,
+                    AuditMessages.createParticipantObjectDetail("Alert Description", e.getMessage().getBytes())));
+            try {
+                if (LOG.isDebugEnabled())
+                    LOG.debug("{}: send Audit Message: ", sock.toString(), AuditMessages.toXML(msg));
+                logger.write(timeStamp, msg);
+            } catch (Exception e2) {
+                e2.printStackTrace();
             }
         }
     }
