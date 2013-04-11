@@ -98,6 +98,7 @@ public class AuditJSSESocketFactory extends JSSESocketFactory {
                     null, 
                     null,
                     AuditMessages.createParticipantObjectDetail("Alert Description", e.getMessage().getBytes())));
+            msg.getAuditSourceIdentification().add(logger.createAuditSourceIdentification());
             try {
                 if (LOG.isDebugEnabled())
                     LOG.debug("{}: send Audit Message: ", sock.toString(), AuditMessages.toXML(msg));
