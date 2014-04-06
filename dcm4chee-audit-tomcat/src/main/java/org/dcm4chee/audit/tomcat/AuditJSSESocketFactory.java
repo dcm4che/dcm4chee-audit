@@ -5,17 +5,17 @@ import java.net.Socket;
 import java.util.Calendar;
 
 import org.apache.tomcat.util.net.jsse.JSSESocketFactory;
-import org.dcm4che.audit.AuditMessage;
-import org.dcm4che.audit.AuditMessages;
-import org.dcm4che.audit.AuditMessages.EventActionCode;
-import org.dcm4che.audit.AuditMessages.EventID;
-import org.dcm4che.audit.AuditMessages.EventOutcomeIndicator;
-import org.dcm4che.audit.AuditMessages.EventTypeCode;
-import org.dcm4che.audit.AuditMessages.ParticipantObjectIDTypeCode;
-import org.dcm4che.audit.AuditMessages.ParticipantObjectTypeCode;
-import org.dcm4che.audit.AuditMessages.ParticipantObjectTypeCodeRole;
-import org.dcm4che.audit.AuditMessages.RoleIDCode;
-import org.dcm4che.net.audit.AuditLogger;
+import org.dcm4che3.audit.AuditMessage;
+import org.dcm4che3.audit.AuditMessages;
+import org.dcm4che3.audit.AuditMessages.EventActionCode;
+import org.dcm4che3.audit.AuditMessages.EventID;
+import org.dcm4che3.audit.AuditMessages.EventOutcomeIndicator;
+import org.dcm4che3.audit.AuditMessages.EventTypeCode;
+import org.dcm4che3.audit.AuditMessages.ParticipantObjectIDTypeCode;
+import org.dcm4che3.audit.AuditMessages.ParticipantObjectTypeCode;
+import org.dcm4che3.audit.AuditMessages.ParticipantObjectTypeCodeRole;
+import org.dcm4che3.audit.AuditMessages.RoleIDCode;
+import org.dcm4che3.net.audit.AuditLogger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
